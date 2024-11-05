@@ -1,0 +1,695 @@
+<html lang="en">
+
+<head>
+<style>
+    * {
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  position: sticky;
+  top: 0;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  height: 100%;
+  color: white;
+  font-family: "Sen", sans-serif;
+}
+
+.logo-container {
+  flex: 1;
+}
+
+.logo {
+  font-size: 30px;
+  color: yellow;
+}
+
+.menu-container {
+  flex: 6;
+}
+
+.menu-list {
+  display: flex;
+  list-style: none;
+}
+
+.menu-list-item {
+  margin-right: 30px;
+}
+
+.menu-list-item.active {
+  font-weight: bold;
+}
+.profile-container {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.profile-text-container {
+  margin: 0 20px;
+}
+
+.profile-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.toggle {
+  width: 40px;
+  height: 20px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+
+.toggle-icon {
+  color: goldenrod;
+}
+
+.toggle-ball {
+  width: 18px;
+  height: 18px;
+  background-color: black;
+  position: absolute;
+  right: 1px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 1s ease all;
+}
+
+.sidebar {
+  width: 50px;
+  height: 100%;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+}
+
+.left-menu-icon {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.container {
+  background-color: #151515;
+  min-height: calc(100vh - 50px);
+  color: white;
+}
+
+.content-container {
+  margin-left: 50px;
+}
+
+.featured-content {
+  height: 50vh;
+  padding: 50px;
+}
+
+.featured-title {
+  width: 200px;
+}
+
+.featured-desc {
+  width: 500px;
+  color: lightgray;
+  margin: 30px 0;
+}
+
+.featured-button {
+  background-color: yellow;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+
+.movie-list-container {
+  padding: 0 20px;
+}
+
+.movie-list-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-list {
+  display: flex;
+  align-items: center;
+  height: 300px;
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.movie-list-item {
+  margin-right: 30px;
+  position: relative;
+}
+
+.movie-list-item:hover .movie-list-item-img {
+  transform: scale(1.2);
+  margin: 0 30px;
+  opacity: 0.5;
+}
+
+.movie-list-item:hover .movie-list-item-title,
+.movie-list-item:hover .movie-list-item-desc,
+.movie-list-item:hover .movie-list-item-button {
+  opacity: 1;
+}
+
+.movie-list-item-img {
+  transition: all 1s ease-in-out;
+  width: 270px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.movie-list-item-title {
+  background-color: #333;
+  padding: 0 10px;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  top: 10%;
+  left: 50px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movie-list-item-desc {
+  background-color: #333;
+  padding: 10px;
+  font-size: 14px;
+  position: absolute;
+  top: 30%;
+  left: 50px;
+  width: 230px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movie-list-item-button {
+  padding: 10px;
+  background-color: yellow;
+  color: black;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+.avn{
+  color: yellow;
+}
+
+.arrow {
+  font-size: 120px;
+  position: absolute;
+  top: 90px;
+  right: 0;
+  color: lightgray;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.container.active {
+  background-color: white;
+}
+
+.movie-list-title.active {
+  color: black;
+}
+
+.navbar-container.active {
+  background-color: white;
+
+  color: black;
+}
+
+.sidebar.active{
+    background-color: white;
+}
+
+.left-menu-icon.active{
+    color: black;
+}
+
+.toggle.active{
+    background-color: black;
+}
+
+.toggle-ball.active{
+    background-color: white;
+    transform: translateX(-20px);
+}
+
+@media only screen and (max-width: 940px){
+    .menu-container{
+        display: none;
+    }
+}
+
+.custom-footer {
+  background-color: #def54a;
+  color: rgb(7, 7, 7);
+  padding: 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Footer text styles */
+.footer-text {
+  font-size: 20px;
+  margin: 0;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Links container */
+.footer-links {
+  margin-top: 10px;
+}
+
+/* Styling individual links */
+.footer-links a,
+.footer-source a {
+  color: #ed1515;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover effect for links */
+.footer-links a:hover {
+  color: #47ffc8; /* Tomato red for hover effect */
+}
+
+/* Source code link styling */
+.footer-source {
+  margin-top: 10px;
+}
+
+.footer-source a:hover {
+  color: #e31d1d; /* Sky blue hover effect for Source Code */
+}
+
+.screen{
+  background-color:rgb(53, 3, 3) ;
+}
+
+
+.quiz-container {
+  border: 1px solid #181010;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #b3cde8;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #151515;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #151515;
+}
+
+.options li {
+  padding: 10px;
+  border: 1px solid #373232;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+.options li:hover {
+  background-color: #766969;
+}
+
+.options li.correct {
+  background-color: #42e769;
+  color: #131413;
+}
+
+.options li.incorrect {
+  background-color: #eb0014;
+  color: #000000;
+}
+
+
+/* Responsive footer for smaller screens */
+@media (max-width: 600px) {
+  .footer-text {
+      font-size: 16px;
+  }
+
+  .footer-links a,
+  .footer-source a {
+      font-size: 14px;
+  }
+}
+</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Movie Design</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">TeluguDude</h1>
+            </div>
+            <div class="menu-container">
+                <ul class="menu-list">
+                    <li class="menu-list-item active" href=# >Home</li>
+                    <li class="menu-list-item" 
+                      href="#movie-list-container">Movies</li>
+                    <li class="menu-list-item" href="#series">Series</li>
+                    <li class="menu-list-item" href="#popular">Popular</li>
+                    <li class="menu-list-item" href="popular">Trends</li>
+
+                </ul>
+            </div>
+            <div class="profile-container">
+                <img class="profile-picture" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1724631882/ncdy0ek8qm2set7s9j6u.jpg"alt="">
+                <div class="profile-text-container">
+                    <span class="profile-text">Profile</span>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <i class="left-menu-icon fas fa-search"></i>
+        <i class="left-menu-icon fas fa-home"></i>
+        <i class="left-menu-icon fas fa-users"></i>
+        <i class="left-menu-icon fas fa-bookmark"></i>
+        <i class="left-menu-icon fas fa-tv"></i>
+        <i class="left-menu-icon fas fa-hourglass-start"></i>
+        <i class="left-menu-icon fas fa-shopping-cart"></i>
+    </div>
+    <div class="container">
+        <div class="content-container"><br>
+            <div class="featured-content"
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729688643/Screenshot_2024-10-23_183342_fmkz46.png');">
+                <img class="featured-title" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729648943/Screenshot_2024-10-23_073154_rfqbmi.png" alt="">
+                <p class="featured-desc">Telugu Movie Entertainment,Here you will be able to watch & enjoy telugu movies,series and shows.
+                <p>Gear up for an unforgettable experience in Telugu cinema, moving the world with its epic tales! 🌟💥</p>  
+                <h2 class="avn">Cinema enthusiasts! ⚡️🎥!</h2>
+                </p><br>
+                <button class="featured-button" href="#movie-list-container">EXPLORE</button>
+            </div>
+            <div class="movie-list-container" id="movie-list-container">
+                <h1 class="movie-list-title">NEW RELEASES</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729685107/Screenshot_2024-10-23_173445_i3hrae.png" alt="">
+                            <span class="movie-list-item-title">Vishwambhara</span>
+                            <p class="movie-list-item-desc"> Cosmic Adventure Begins! 🌌 Screens on January 10, 2025.</p>
+                            <a href="https://youtu.be/NCv-wz1nSnE?si=d48N7TQNM6FR6kAB"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729686211/Screenshot_2024-10-23_175255_lpwoqw.png" alt="">
+                            <span class="movie-list-item-title">Game Changer </span>
+                            <p class="movie-list-item-desc">Epic Revolution Unfolds! 🚀 Releasing on January 10, 2025.</p>
+                            <a href="https://youtu.be/Dv5QZJ6iRTg?si=cYk4n02WbNN3KBjm"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729689105/Screenshot_2024-10-23_184127_h0jvch.png" alt="">
+                            <span class="movie-list-item-title">The Raja Saab</span>
+                            <p class="movie-list-item-desc">Majestic! 👑Set to release on April 10, 2025. </p>
+                            <a href="https://youtu.be/ihO4EGhUS_4?si=GfxA9L3gXggrCgqi"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729689592/Screenshot_2024-10-23_184908_iwtv2w.png" alt="">
+                            <span class="movie-list-item-title">Hari Hara Veera Mallu Part-1: Sword vs Spirit</span>
+                            <p class="movie-list-item-desc"> Legendary! 🎬✨Releasing on March 28, 2025.</p>
+                            <a href="https://youtu.be/4TriF7BfHyI?si=oOTZQYt5drYuS8yt"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729690302/Screenshot_2024-10-23_190123_cynr47.png" alt="">
+                            <span class="movie-list-item-title">Mirai</span>
+                            <p class="movie-list-item-desc">Action-sci-fi thriller! Releasing on April 18, 2025.</p>
+                            <a href="https://youtu.be/WBD5PG2NhSM?si=7s8HHC0vSNGDYy9K"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729691762/Screenshot_2024-10-23_192537_hnkyxd.png" alt="">
+                            <span class="movie-list-item-title">NBK 109</span>
+                            <p class="movie-list-item-desc">Power-packed! 🔥Releasing on January 12, 2025..</p>
+                            <a href="https://youtu.be/HYu23wXZDbQ?si=tj7731yZWJCqe_8u"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="movie-list-container" id="series">
+                <h1 class="movie-list-title">Series & Shows</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729690938/Screenshot_2024-10-23_191159_ueczyp.png" alt="">
+                            <span class="movie-list-item-title">90’s - A Middle Class Biopic</span>
+                            <p class="movie-list-item-desc">Depicting the life of a middle-class family.</p>
+                           <a href="https://youtu.be/AhaGY-2KCMU?si=oO7tRPFxS_djAqTO"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729692291/Screenshot_2024-10-23_193200_e13dpd.png" alt="">
+                            <span class="movie-list-item-title">Geetha Subramanyam</span>
+                            <p class="movie-list-item-desc">A rom-com series dealing with the romantic ups and downs of a couple.</p>
+                           <a href="https://youtu.be/hmcfwz2Mk-M?si=Pe2kqRsUk-VbqQIN"> <button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729694296/Screenshot_2024-10-23_200748_ino2ah.png" alt="">
+                            <span class="movie-list-item-title">The Breakup Consultant </span>
+                            <p class="movie-list-item-desc">A unique series about a protagonist who starts a consultancy to counsel people through breakups
+                            </p>
+                            <a href="https://youtube.com/playlist?list=PL7CB6DEiRYJaisqKvcU2np2YKGdLU8BAQ&si=9unElItoo53lM108"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729694976/Screenshot_2024-10-23_201341_lisrmt.png" alt="">
+                            <span class="movie-list-item-title">Chef Mantra</span>
+                            <p class="movie-list-item-desc">  Delightful Telugu talk and cooking show.</p>
+                           <a href="https://youtube.com/playlist?list=PLQuXk4Jp0QAbWIVX2wE71avRni_GoC20d&si=HuJby8hZT0Z2vOyf" ><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729695585/Screenshot_2024-10-23_202913_ghvviz.png" alt="">
+                            <span class="movie-list-item-title">Mansion 24</span>
+                            <p class="movie-list-item-desc"> A horror-action-adventure series about a young woman searching for her missing father in an old mansion
+                              .</p>
+                           <a href="https://youtu.be/PAgmiobIauM?si=4jRhUxg9PKe-Z_2W"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729695834/Screenshot_2024-10-23_203327_x3i8sy.png" alt="">
+                            <span class="movie-list-item-title">Sotari Brothers</span>
+                            <p class="movie-list-item-desc">Two bachelor brothers navigating everyday life.</p>
+                            <a href="https://youtube.com/playlist?list=PLsjHKhL4S0DILe4bNptvjfsHaMXEOygn6&si=Vy0DxB7G8cDuhj-Q"><button class="movie-list-item-button" >Watch</button></a>
+                        </div>
+                        
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="featured-content"
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729700043/Screenshot_2024-10-23_214341_qgh88e.png');">
+                <img class="featured-title" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729648943/Screenshot_2024-10-23_073154_rfqbmi.png" alt="">
+                <p class="featured-desc">Eagerly waiting .....Famous Tollowood heros films  will be released in 2025.Get latest updates from TeluguDude about Telugu film industry.
+                </p>
+               <a  href="https://filmyfocus.com/"> <button class="featured-button" >Look here 👀</button></a>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">ON THE HORIZON</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729702194/Screenshot_2024-10-23_221926_r6ddnv.png" alt="">
+                            <span class="movie-list-item-title">BrahmaAnandam</span>
+                            <p class="movie-list-item-desc">Delightful comedy.
+                            </p>
+                            <a href="https://telanganatoday.com/brahmanandams-first-look-from-brahmaanandam-unveiled"><button class="movie-list-item-button" >NEWS</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729734550/Screenshot_2024-10-24_071813_armbxu.png" alt="">
+                            <span class="movie-list-item-title">HIT: The Third Case</span>
+                            <p class="movie-list-item-desc">Investigative thriller.</p>
+                            <a href="https://www.filmibeat.com/telugu/movies/hit-the-3rd-case.html#synopsis"><button class="movie-list-item-button" >NEWS</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729735175/Screenshot_2024-10-24_072812_qtwmgp.png" alt="">
+                            <span class="movie-list-item-title">Laila</span>
+                            <p class="movie-list-item-desc">Romantic action film .</p>
+                            <a href="https://www.filmibeat.com/telugu/movies/laila.html"><button class="movie-list-item-button" >NEWS</button> </a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729735671/Screenshot_2024-10-24_073357_jacfpy.png" alt="">
+                            <span class="movie-list-item-title">SSMB29</span>
+                            <p class="movie-list-item-desc">Jungle adventure.</p>
+                           <a href="https://www.gulte.com/movienews/312647/two-fresh-rumors-on-ssmb29-heres-clarity" ><button class="movie-list-item-button" >Watch news.</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729736029/Screenshot_2024-10-24_074126_puvoym.png" alt="">
+                            <span class="movie-list-item-title">
+                              Dhootha</span>
+                            <p class="movie-list-item-desc">A horror-crime drama.</p>
+                            <a href="https://www.activenoon.com/dhootha-season-2-release-date-240329/"><button class="movie-list-item-button" >Watch news.</button></a>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://res.cloudinary.com/dnxqhdrpt/image/upload/v1729736219/Screenshot_2024-10-24_074619_g8hzxk.png" alt="">
+                            <span class="movie-list-item-title">Endukila</span>
+                            <p class="movie-list-item-desc">A romantic comedy series.</p>
+                           <a href="https://www.yupptv.com/tvshows/endukila"><button class="movie-list-item-button" >Watch Series</button></a>
+                        </div>
+                        
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+
+                       
+                       
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen">
+        <div class="quiz-container">
+            <h2 class="question">Which movie will be the block buster in 2025?</h2>
+            <ul class="options">
+              <li data-correct="true">Vishwambhara</li>
+              <li>GameChanger</li>
+              <li>Laila</li>
+              <li> SSMB29🪄</li>
+              <li>NBK109 </li>
+              <li>Hari Hara Veera Mallu Part-1</li>
+            </ul>
+          </div>
+        </div>
+          
+
+        <footer class="custom-footer">
+            <p class="footer-text">Created by C.S.Likitha </p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/likitha-cs-b2385b260?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Likitha-CS">Github</a>
+            </div>
+            <div class="footer-source">
+            </div>
+        </footer>
+    </div>
+    <script src="app.js">
+const arrows = document.querySelectorAll(".arrow");
+const movieLists = document.querySelectorAll(".movie-list");
+
+arrows.forEach((arrow, i) => {
+  const itemNumber = movieLists[i].querySelectorAll("img").length;
+  let clickCounter = 0;
+  arrow.addEventListener("click", () => {
+    const ratio = Math.floor(window.innerWidth / 270);
+    clickCounter++;
+    if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
+      movieLists[i].style.transform = `translateX(${
+        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
+      }px)`;
+    } else {
+      movieLists[i].style.transform = "translateX(0)";
+      clickCounter = 0;
+    }
+  });
+
+  console.log(Math.floor(window.innerWidth / 270));
+});
+
+//TOGGLE
+
+const ball = document.querySelector(".toggle-ball");
+const items = document.querySelectorAll(
+  ".container,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle"
+);
+
+ball.addEventListener("click", () => {
+  items.forEach((item) => {
+    item.classList.toggle("active");
+  });
+  ball.classList.toggle("active");
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const options = document.querySelectorAll('.options li');
+  
+  options.forEach(option => {
+      option.addEventListener('click', function () {
+          options.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+          
+          if (this.dataset.correct === 'true') {
+              this.classList.add('correct');
+          } else {
+              this.classList.add('incorrect');
+          }
+      });
+  });
+});
+    </script>
+</body>
+
+</html>
